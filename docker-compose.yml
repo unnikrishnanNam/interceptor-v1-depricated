@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres:15
+    container_name: interceptor_postgres
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+      POSTGRES_PASSWORD: testpass@123
+    ports:
+      - "5433:5432"  # Using 5433 to avoid conflicts with local postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - interceptor_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: interceptor_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - interceptor_network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  interceptor_network:
+    driver: bridge
