@@ -1,3 +1,6 @@
+This project is abandoned
+Refer - https://github.com/unnikrishnanNam/interceptor-v1
+
 # PostgreSQL Interceptor Proxy
 
 A simple PostgreSQL proxy that intercepts database queries, requires admin approval for dangerous operations, and provides a web-based administration interface.
